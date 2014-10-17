@@ -18,7 +18,10 @@ test('connects', function() {
   con.connect();
   assert.emits(con, 'connect', function() {
     test('disconnects', function() {
-      con.end();
+      setTimeout(function() {
+        console.log('about to end')
+        con.end();
+      }, 100)
     })
   })
 })
@@ -31,7 +34,10 @@ test('preserves domain', function() {
     assert.ok(dom === require('domain').active, 'domain is active');
     con.connect(function() {
       assert.ok(dom === require('domain').active, 'domain is still active');
-      con.end();
+      setTimeout(function() {
+        console.log('about to end from domain')
+        con.end();
+      }, 300)
     });
   });
 })
